@@ -32,7 +32,7 @@ function BurgerConstructor({ burgerArr }) {
 
   return (
     <section className={`${styles.section} mt-25`}>
-      <div className={`${styles.list} custom-scroll pt-4 pl-4`}>
+     
         <div className={`${styles['burger-bun']} pl-8`}>
           {Bun && Bun.name && (
             <ConstructorElement
@@ -44,8 +44,10 @@ function BurgerConstructor({ burgerArr }) {
             />
           )}
         </div>
-        <BurgerElements ingredients = {ElmArr} />
-        <div className={`${styles['burger-bun']} pl-8`}>
+        <div className={`${styles.list} custom-scroll pt-4 pl-4`}>
+          <BurgerElements ingredients = {ElmArr} />
+      </div>
+        <div className={`${styles['burger-bun']} pl-6 pr-3 pt-4`}>
           {Bun && Bun.name && (
             <ConstructorElement
               type="top"
@@ -56,7 +58,6 @@ function BurgerConstructor({ burgerArr }) {
             />
           )}
         </div>
-      </div>
       <div className={`${styles.order} mr-4 mt-10`}>
         <div className={styles.total}>
           <span className="text text_type_digits-medium">{totalPrice}</span>

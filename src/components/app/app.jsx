@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [data, setData] = useState([]);
 
-  const BaseURL = 'https://norma.nomoreparties.space/api/ingredients ';
+  const BaseURL = 'https://norma.nomoreparties.space/api/ingredients';
 
   useEffect(() => {
     fetch(BaseURL)
