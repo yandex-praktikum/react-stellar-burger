@@ -21,21 +21,26 @@ function IngredientCard({el}) {
   };
   
   return (
-    <div className={styles.card} onClick={handleClick}>
-      {count > 0 && <Counter count={count} size="default" />}
-      <img className={styles.image} src={el.image} alt={el.name} onClick={handleModalOpen} />
+    <>
+      <div className={styles.card} onClick={handleClick}>
+        {count > 0 && <Counter count={count} size="default" />}
+        <img className={styles.image} src={el.image} alt={el.name} onClick={handleModalOpen} />
 
+        <div className={styles.price}>
+          <span className='text text_type_digits-default pb-1'>{el.price}</span>
+          <CurrencyIcon type="primary" />
+        </div>
+        <div className={`${styles['name-card']} text text_type_main-default`}>{el.name}</div>
+      </div>
+      
       {modalOpen && (
         <Modal onClose={() => setModalOpen(false)}>
           <IngredientDetails  el={el}/>
         </Modal>
       )}
-      <div className={styles.price}>
-        <span className='text text_type_digits-default pb-1'>{el.price}</span>
-        <CurrencyIcon type="primary" />
-      </div>
-      <div className={`${styles['name-card']} text text_type_main-default`}>{el.name}</div>
-    </div>
+      
+  </>
+    
   );
 }
 
