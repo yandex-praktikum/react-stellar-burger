@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientCards from './ingredient-cards/ingredient-cards';
-import { data } from '../../utils/data';
+import ingredientPropType from '../../utils/prop-types';
+import PropTypes from 'prop-types';
 
+function BurgerIngredients({ ingredients }) {
 
-function BurgerIngredients() {
-    const [current, setCurrent] = useState('bun')
+    const [current, setCurrent] = useState('bun');
+
+    const filter = (type) => ingredients.filter((el) => el.type === type);
 
     return (
         <section className={styles.section}>
@@ -24,22 +27,15 @@ function BurgerIngredients() {
             </div>
 
             <div className={`${styles['burger-card']} custom-scroll`}>
-                <IngredientCards title="Булки"
-                    cardsArr={data.filter((el) => {
-                        return el.type === "bun";
-                    })} />
-                <IngredientCards title="Соусы"
-                    cardsArr={data.filter((el) => {
-                        return el.type === "sauce";
-                    })} />
-                <IngredientCards title="Начинки"
-                    cardsArr={data.filter((el) => {
-                        return el.type === "main";
-                    })} />
+                <IngredientCards title="Булки" cardsArr={filter('bun')} />
+                <IngredientCards title="Соусы" cardsArr={filter('sauce')} />
+                <IngredientCards title="Начинки" cardsArr={filter('main')} />
             </div>
         </section>
     );
 };
 
-
+BurgerIngredients.propTypes = {
+    ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+};
 export default BurgerIngredients;
