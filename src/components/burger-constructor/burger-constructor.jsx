@@ -1,78 +1,74 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
 import BurgerElements from './burger-elements/burger-elements';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientPropType from '../../utils/prop-types';
+import { useModal } from '../../hooks/use-modal';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
 function BurgerConstructor({ burgerArr }) {
-
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const { Bun, ElmArr, totalPrice } = burgerArr.reduce(
+  const [isModalOpen, openModal, closeModal] = useModal();
+  const { bun, elmArr, totalPrice } = burgerArr.reduce(
     (acc, { type, ...props }) => {
       if (type === 'bun') {
-        acc.Bun = props;
+        acc.bun = props;
         acc.totalPrice += props.price * 2;
       } else {
-        acc.ElmArr.push(props);
+        acc.elmArr.push(props);
         acc.totalPrice += props.price;
       }
 
       return acc;
     },
-    { Bun: null, ElmArr: [], totalPrice: 0 }
+    { bun: null, elmArr: [], totalPrice: 0 }
   );
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  }
-
   return (
-    <section className={`${styles.section} mt-25`}>
-     
+    <>
+      <section className={`${styles.section} mt-25`}>
         <div className={`${styles['burger-bun']} pl-8`}>
-          {Bun && Bun.name && (
+          {bun && bun.name && (
             <ConstructorElement
               type="top"
               isLocked={true}
-              text={`${Bun.name} (верх)`}
-              price={Bun.price}
-              thumbnail={Bun.image}
+              text={`${bun.name} (верх)`}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           )}
         </div>
         <div className={`${styles.list} custom-scroll pt-4 pl-4`}>
-          <BurgerElements ingredients = {ElmArr} />
-      </div>
+          <BurgerElements ingredients={elmArr} />
+        </div>
         <div className={`${styles['burger-bun']} pl-6 pr-3 pt-4`}>
-          {Bun && Bun.name && (
+          {bun && bun.name && (
             <ConstructorElement
-              type="top"
+              type="bottom"
               isLocked={true}
-              text={`${Bun.name} (низ)`}
-              price={Bun.price}
-              thumbnail={Bun.image}
+              text={`${bun.name} (низ)`}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           )}
         </div>
-      <div className={`${styles.order} mr-4 mt-10`}>
-        <div className={styles.total}>
-          <span className="text text_type_digits-medium">{totalPrice}</span>
-          <CurrencyIcon type="primary" />
+        <div className={`${styles.order} mr-4 mt-10`}>
+          <div className={styles.total}>
+            <span className="text text_type_digits-medium">{totalPrice}</span>
+            <CurrencyIcon type="primary" />
+          </div>
+          <Button htmlType="button" type="primary" size="large" onClick={openModal}>
+            Оформить заказ
+          </Button>
         </div>
-        {modalOpen && (
-          <Modal onClose={() => setModalOpen(false)}>
-            <OrderDetails />
-          </Modal>
-        )}
-        <Button htmlType="button" type="primary" size="large" onClick={handleModalOpen}>
-          Оформить заказ
-        </Button>
-      </div>
-    </section>
+      </section>
+      {isModalOpen && (
+        <Modal onClose={closeModal}>
+          <OrderDetails />
+        </Modal>
+      )}
+    </>
   );
 }
 

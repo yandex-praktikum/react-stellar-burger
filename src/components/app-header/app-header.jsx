@@ -1,12 +1,11 @@
-import {Logo, ListIcon, BurgerIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import headerStyles from './app-header.module.css'
+import { Logo, ListIcon, BurgerIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import headerStyles from './app-header.module.css';
 
 export default function AppHeader() {
   return (
     <header className={headerStyles['app-header']}>
-      <nav className={headerStyles['menu-header']} >
-        <ul className={`${headerStyles['list-header']} pb-4 pt-4`} >
-
+      <nav className={headerStyles['menu-header']}>
+        <ul className={`${headerStyles['list-header']} pb-4 pt-4`}>
           <li className='pl-5 pr-5 pb-5 pt-5 '>
             <a href='#' className={headerStyles['link-header']}>
               <BurgerIcon type="primary" />
@@ -30,5 +29,5 @@ export default function AppHeader() {
         </ul>
       </nav>
     </header>
-  )
+  );
 }
