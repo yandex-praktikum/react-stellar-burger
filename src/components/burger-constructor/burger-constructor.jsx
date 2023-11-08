@@ -4,61 +4,76 @@ import PropTypes from 'prop-types';
 import BurgerElements from './burger-elements/burger-elements';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientPropType from '../../utils/prop-types';
+import { useModal } from '../../hooks/use-modal';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 
 function BurgerConstructor({ burgerArr }) {
-  const { Bun, ElmArr, totalPrice } = burgerArr.reduce(
+  const [isModalOpen, openModal, closeModal] = useModal();
+  const { bun, elmArr, totalPrice } = burgerArr.reduce(
     (acc, { type, ...props }) => {
       if (type === 'bun') {
-        acc.Bun = props;
+        acc.bun = props;
         acc.totalPrice += props.price * 2;
       } else {
-        acc.ElmArr.push(props);
+        acc.elmArr.push(props);
         acc.totalPrice += props.price;
       }
 
       return acc;
     },
-    { Bun: null, ElmArr: [], totalPrice: 0 }
+    { bun: null, elmArr: [], totalPrice: 0 }
   );
 
   return (
-    <section className={`${styles.section} mt-25`}>
-      <div className={`${styles.list} custom-scroll pt-4 pl-4`}>
+    <>
+      <section className={`${styles.section} mt-25`}>
         <div className={`${styles['burger-bun']} pl-8`}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={`${Bun.name} (верх)`}
-            price={Bun.price}
-            thumbnail={Bun.image}
-          />
+          {bun && bun.name && (
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${bun.name} (верх)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          )}
         </div>
-        <BurgerElements ingredients = {ElmArr} />
-        <div className={`${styles['burger-bun']} pl-8`}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={`${Bun.name} (низ)`}
-            price={Bun.price}
-            thumbnail={Bun.image}
-          />
+        <div className={`${styles.list} custom-scroll pt-4 pl-4`}>
+          <BurgerElements ingredients={elmArr} />
         </div>
-      </div>
-      <div className={`${styles.order} mr-4 mt-10`}>
-        <div className={styles.total}>
-          <span className="text text_type_digits-medium">{totalPrice}</span>
-          <CurrencyIcon type="primary" />
+        <div className={`${styles['burger-bun']} pl-6 pr-3 pt-4`}>
+          {bun && bun.name && (
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${bun.name} (низ)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          )}
         </div>
-        <Button htmlType="button" type="primary" size="large">
-          Оформить заказ
-        </Button>
-      </div>
-    </section>
+        <div className={`${styles.order} mr-4 mt-10`}>
+          <div className={styles.total}>
+            <span className="text text_type_digits-medium">{totalPrice}</span>
+            <CurrencyIcon type="primary" />
+          </div>
+          <Button htmlType="button" type="primary" size="large" onClick={openModal}>
+            Оформить заказ
+          </Button>
+        </div>
+      </section>
+      {isModalOpen && (
+        <Modal onClose={closeModal}>
+          <OrderDetails />
+        </Modal>
+      )}
+    </>
   );
 }
 
 BurgerConstructor.propTypes = {
-  burgerArr: PropTypes.arrayOf(ingredientPropType).isRequired,
+  burgerArr: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
 };
 
 export default BurgerConstructor;
