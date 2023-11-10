@@ -1,14 +1,14 @@
-.container{
+.orderDetails {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
-.image{
-    max-width: 120px;
-    max-height: 120px;
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
+.image {
+    width: 120px;
+    height: 120px;
+}
+
+.orderWait {
+    color: var(--text-dark-grey-secondary-text, #8585AD);
 }

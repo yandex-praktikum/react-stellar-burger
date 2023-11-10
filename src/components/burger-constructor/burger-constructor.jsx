@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './burger-constructor.module.css';
+import styles from "./burger-counstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstTotal from "./burger-elements/burger-const-total";
 import BurgerFullPrice from "./burger-elements/burger-full-price";

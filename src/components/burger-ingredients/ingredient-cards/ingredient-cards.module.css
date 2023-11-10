@@ -1,10 +1,13 @@
-.container{
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    width: 100%;
+.ingredientsScroll {
+    max-height: 700px;
+    overflow: auto;
+    padding: 0 10px 10px 10px;
     max-width: 600px;
-    row-gap: 32px;
-    column-gap: 24px;
-    justify-content: space-around;
-
 }
+
+.cardContainer {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
