@@ -1,42 +1,47 @@
-import React, { useEffect } from "react";
-import { createPortal } from "react-dom";
-import styles from "./modal.module.css";
+import React, { useCallback, useEffect } from "react";
+import ReactDOM from "react-dom";
+import styles from "./Modal.module.css";
+import CloseButton from "../close-button/close-button";
 import ModalOverlay from "../modal-overlay/modal-overlay";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 
-export default function Modal({ children, onClose }) {
-  useEffect(() => {
-    const handleEscKeyPress = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
+const mRoot = document.getElementById("react-modals");
 
-    document.addEventListener("keydown", handleEscKeyPress);
+const Modal = ({ header, closeModal, children }) => {
 
-    return () => {
-      document.removeEventListener("keydown", handleEscKeyPress);
-    };
-  }, [onClose]);
+    const handleCloseModal = useCallback(() => {
+       closeModal();
+    }, [closeModal]);
 
-  return createPortal(
-    <div className={styles.popup}>
-      <div className={styles.modal}>
-        {children}
-        <div className={styles["modal-button"]}>
-          {" "}
-          <CloseIcon onClick={onClose} />
-        </div>
-      </div>
+    useEffect(() => {
+        const closeByUseEsc = (evt) => {
+            evt.key === "Escape" && handleCloseModal();
+        };
 
-      <ModalOverlay onClick={onClose} />
-    </div>,
-    document.getElementById("modal-root")
-  );
-}
+        document.addEventListener("keydown", closeByUseEsc);
 
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+        return () => {
+            document.removeEventListener("keydown", closeByUseEsc);
+        };
+    }, [handleCloseModal]);
+
+    return ReactDOM.createPortal(
+        <>
+            <div className={styles.modal}>
+                <section className={`${styles.modalContainer}`}>
+                    <h2 className={`${styles.modalTitle} pt-10 pr-10 pl-10`}>
+                        <p className={`text text_type_main-large`}>{header}</p>
+                        <CloseButton onClick={handleCloseModal} />
+                    </h2>
+                    {children}
+                </section>
+            </div>
+            <ModalOverlay onClick={handleCloseModal} />
+        </>,
+        mRoot
+    );
 };
+
+
+
+
+export default Modal;

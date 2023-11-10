@@ -1,0 +1,9 @@
+.ingredientsContainer {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabsContainer {
+    display: flex;
+}
