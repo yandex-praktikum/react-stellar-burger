@@ -88,7 +88,7 @@ function App() {
             <AppHeader />
             <SelectedComponentContext.Provider value={{ ingredientsConstructor, ingredientsConstructorDispatcher }}>
                 <ShowModalContext.Provider value={{ showModal, showModalDispatcher }}>
-                    <div className={styles.main}>
+                    <div className={styles["app-body"]}>
                         <LoadIngredient onDataLoaded={handleDataLoad} onError={handleError} />
                         <div>
                             {error && <p>{error}</p>}
