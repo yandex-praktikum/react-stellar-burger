@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../ingredient-cards/ingredient-cards.module.css";
+import styles from "../ingredient-cards/card-list.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { cardsPropType } from "../../../utils/prop-types";
 import { SelectedComponentContext } from "../../../services/burger-consctructor-context";
