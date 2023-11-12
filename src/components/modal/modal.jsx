@@ -4,7 +4,7 @@ import styles from "./Modal.module.css";
 import CloseButton from "../close-button/close-button";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
-const mRoot = document.getElementById("react-modals");
+const mRoot = document.getElementById("modal-root");
 
 const Modal = ({ header, closeModal, children }) => {
 
