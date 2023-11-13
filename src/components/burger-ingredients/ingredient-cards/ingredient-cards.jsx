@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import styles from "./ingredient-cards.module.css";
 import IngredientsTabs from "../ingredient-card/ingredient-tabs";
 import CardList from "./card-list";
-import Modal from "../../modal/Modal";
+import Modal from "../../modal/modal";
 import IngredientDetail from "../../ingredient-details/ingredient-detail";
 import { ingredientPropType } from "../../../utils/prop-types";
 

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-full-price.module.css";
-import Modal from "../../modal/Modal";
+import Modal from "../../modal/modal";
 import OrderDetails from "../../order-details/order-details";
 import { SelectedComponentContext } from "../../../services/burger-consctructor-context";
 
