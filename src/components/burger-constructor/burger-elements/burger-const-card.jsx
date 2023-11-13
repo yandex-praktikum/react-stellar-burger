@@ -20,7 +20,6 @@ export function BurgerConstCard({ moveCard, index, id, item }) {
   const dispatch = useDispatch();
 
   function deleteCard(item) {
-    // вызов действия, которое будет удалять элемент из состояния
     dispatch(removeCurrentIngredient(item));
   }
 

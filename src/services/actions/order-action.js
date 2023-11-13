@@ -44,7 +44,7 @@ export function getBurgerOrder(data) {
     })
       .then((res) => checkResponse(res))
       .then((data) => {
-        const orderNumber = data.order.number; // Получаем только номер заказа
+        const orderNumber = data.order.number;
         dispatch(postOrderSuccess(orderNumber));
       })
       .catch(() => {

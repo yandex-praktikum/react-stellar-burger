@@ -20,22 +20,15 @@ function Card({ item, onClick }) {
         }),
     });
     const checkCount = (item) => {
-        //устанавливаем счетчик как 0
         let count = 0;
         if (item.type === "bun") {
-            // в переменную счетчик ставим 1 если в хранилище в поле bun id совпадает с id текущего элемена
             count = ingredientsConstructor.bun?._id === item._id ? 2 : 0;
-            // const count = (currentItem._id === selectedIngredients.bun?._id) ? 2 : 0
         }
-
-        //иначе если элемент не булочка, то =>
         else {
-            // в переменную счетчик ставим длинну массива отфильтрованного по id текущего элемента.
             count = ingredientsConstructor.other.filter(
                 (ingredient) => ingredient._id === item._id
             ).length;
         }
-        // возвращаем найденный счетчик
         return count;
     };
     const handleClick = () => {
