@@ -20,6 +20,11 @@
     gap: 32px 24px;
 }
 
+.typePart {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .listElement {
     cursor: pointer;
     display: flex;

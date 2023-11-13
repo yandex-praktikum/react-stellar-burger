@@ -23,5 +23,9 @@ export const ingredientDetailPropType = {
 };
 
 export const cardsPropType = {
-  item: ingredientPropTypes.isRequired
-}
+  item: ingredientPropTypes.isRequired,
+};
+
+export const checklNumber = PropTypes.number.isRequired;
+export const checkString = PropTypes.string.isRequired;
+export const optionalObject = PropTypes.object.isRequired;

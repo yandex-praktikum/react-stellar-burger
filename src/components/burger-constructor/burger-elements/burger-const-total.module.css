@@ -40,3 +40,12 @@
     justify-content: center;
     gap: 8px;
 }
+
+.show {
+    opacity: 1;
+    transition: 1s;
+}
+
+.hidden {
+    opacity: 0;
+}

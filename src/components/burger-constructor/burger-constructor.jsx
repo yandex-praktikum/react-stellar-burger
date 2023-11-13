@@ -3,54 +3,78 @@ import styles from "./burger-counstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstTotal from "./burger-elements/burger-const-total";
 import BurgerFullPrice from "./burger-elements/burger-full-price";
-import { ingredientPropType } from "../../utils/prop-types";
-import { SelectedComponentContext } from "../../services/burger-consctructor-context";
 
+import { useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import PropTypes from "prop-types";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ onDropHandler }) => {
+    const ingredientsConstructor = useSelector(
+        (store) => store.currentIngredients
+    );
 
-    const {ingredientsConstructor} = React.useContext(SelectedComponentContext);
     const burgerInfill = ingredientsConstructor.other;
     const burgerBun = ingredientsConstructor.bun;
-    console.log(burgerBun);
-    const nameBun = burgerBun.name;
-    const imageBun = burgerBun.image;
-    const priceBun = burgerBun.price;
 
+    let nameBun = "";
+    let imageBun = "";
+    let priceBun = "";
+    if (burgerBun) {
+        nameBun = burgerBun.name;
+        imageBun = burgerBun.image;
+        priceBun = burgerBun.price;
+    }
+
+    const [{ isOver, canDrop }, dropRef] = useDrop({
+        accept: "ingredients",
+        drop(item, monitor) {
+            if (!monitor.isOver({ shallow: true })) {
+                return;
+            }
+            onDropHandler(item);
+        },
+        collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+        }),
+    });
+
+    const box = isOver ? styles.dropBoxOver : (canDrop ? styles.dropBoxOver1 : styles.dropBoxT);
 
     return (
-         <section className={`${styles.mainContainer} custom-scroll`}>
-            <div className={styles.constContainer}>
-               {(Object.keys(burgerBun).length !== 0) && <ConstructorElement
-                    type="top"
-                    isLocked={true}
-                    text={`${nameBun} (верх)`}
-                    price={priceBun}
-                    thumbnail={imageBun}
-                    
-                />}
-            </div>
-                 {(burgerInfill.length > 0) && <BurgerConstTotal burgerInfill={burgerInfill} />}
-             <div className={styles.constContainer}>
-             {(Object.keys(burgerBun).length !== 0) && <ConstructorElement
-                    type="bottom"
-                    isLocked={true}
-                    text={`${nameBun} (низ)`}
-                    price={priceBun}
-                    thumbnail={imageBun}
-                    
-                />}
-                 <BurgerFullPrice />
-             </div>
-        </section>
+        <div ref={dropRef} className={`${box} ${styles.dropBox}`}>
+            <section className={`${styles.mainContainer} custom-scroll`}>
+                <div className={styles.constContainer}>
+                    {burgerBun && (
+                        <ConstructorElement
+                            type="top"
+                            isLocked={true}
+                            text={`${nameBun} (верх)`}
+                            price={priceBun}
+                            thumbnail={imageBun}
+                        />
+                    )}
+                </div>
+                {burgerInfill.length > 0 && (
+                    <BurgerConstTotal burgerInfill={burgerInfill} />
+                )}
+                <div className={styles.constContainer}>
+                    {burgerBun && (
+                        <ConstructorElement
+                            type="bottom"
+                            isLocked={true}
+                            text={`${nameBun} (низ)`}
+                            price={priceBun}
+                            thumbnail={imageBun}
+                        />
+                    )}
+                    <BurgerFullPrice />
+                </div>
+            </section>
+        </div>
+    );
+};
 
-    )
-}
+BurgerConstructor.propTypes = { onDropHandler: PropTypes.func.isRequired };
 
-BurgerConstructor.propTypes = ingredientPropType
-  
-BurgerConstructor.defaultProps = {
-    ingredients: [],
-  };
-
-export default BurgerConstructor
+export default BurgerConstructor;
