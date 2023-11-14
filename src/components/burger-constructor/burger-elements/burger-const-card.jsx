@@ -73,7 +73,7 @@ export function BurgerConstCard({ moveCard, index, id, item }) {
       <li className={`${styles.totalContainer} mt-4 mb-4`}>
         <DragIcon />
         <div className={`${styles.elementTotal} pt-4 pr-6 pb-4 pl-6`}>
-          <img src={item.image} alt="" className={`${styles.elementImage}`} />
+          <img src={item.image} alt={item.name} className={`${styles.elementImage}`} />
           <span
             className={`${styles.elementTitle} text text_type_main-default mr-5`}
           >

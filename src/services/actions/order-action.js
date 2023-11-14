@@ -47,7 +47,7 @@ export function getBurgerOrder(data) {
         const orderNumber = data.order.number;
         dispatch(postOrderSuccess(orderNumber));
       })
-      .catch(() => {
+      .catch(() => {  
         dispatch(postOrderFailure());
       });
   };

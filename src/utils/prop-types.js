@@ -24,8 +24,15 @@ export const ingredientDetailPropType = {
 
 export const cardsPropType = {
   item: ingredientPropTypes.isRequired,
+  onclick: PropTypes.func.isRequired
 };
 
 export const checklNumber = PropTypes.number.isRequired;
 export const checkString = PropTypes.string.isRequired;
 export const optionalObject = PropTypes.object.isRequired;
+
+export const modalPropType = {
+  closeModal: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  header: PropTypes.string.isRequired
+};

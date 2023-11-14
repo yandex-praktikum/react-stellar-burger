@@ -3,13 +3,14 @@ import ReactDOM from "react-dom";
 import styles from "./modal.module.css";
 import CloseButton from "../close-button/close-button";
 import ModalOverlay from "../modal-overlay/modal-overlay";
+import { modalPropType } from "../../utils/prop-types";
 
 const mRoot = document.getElementById("modal-root");
 
 const Modal = ({ header, closeModal, children }) => {
 
     const handleCloseModal = useCallback(() => {
-       closeModal();
+        closeModal();
     }, [closeModal]);
 
     useEffect(() => {
@@ -41,7 +42,6 @@ const Modal = ({ header, closeModal, children }) => {
     );
 };
 
-
-
+Modal.propTypes = modalPropType;
 
 export default Modal;

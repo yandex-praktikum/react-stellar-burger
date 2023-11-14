@@ -40,16 +40,12 @@ function App() {
         return (
             <div className={styles.app}>
                 <AppHeader />
-                <div className={styles.main}>
+                <main className={styles.main}>
                     <DndProvider backend={HTML5Backend}>
-                        <div>
-                            <BurgerIngredients ingredients={ingredients} />
-                        </div>
-                        <div>
+                            <BurgerIngredients/>
                             <BurgerConstructor onDropHandler={handleDrop} />
-                        </div>
                     </DndProvider>
-                </div>
+                </main>
             </div>
         );
     }

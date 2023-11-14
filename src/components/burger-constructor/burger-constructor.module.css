@@ -35,3 +35,14 @@
 .dropBoxT {
     border: none;
 }
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 100px;
+}
+
+.constContainer {
+    margin-left: 42px;
+}

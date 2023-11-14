@@ -50,34 +50,32 @@ function Card({ item, onClick }) {
         onClick();
     };
     return (
-        <>
-            <div ref={dragRef}>
-                <li className={`${styles.listElement}`} onClick={() => handleClick(item)}>
-                    {checkCount(item) !== 0 && (
-                        <Counter count={checkCount(item)} size="default" />
-                    )}
-                    <img
-                        className={`${styles.cardPhoto}  pl-4 pb-4`}
-                        src={item.image}
-                        alt={item.name}
-                        onClick={() => handlePopupClick(item)}
-                    ></img>
-                    <div className={`${styles.currencyContainer}`}>
-                        <p
-                            className={`${styles.cardsPrice} pt-2 pb-2 pr-4 text text_type_digits-default`}
-                        >
-                            {item.price}
-                        </p>
-                        <CurrencyIcon />
-                    </div>
+        <div ref={dragRef}>
+            <li className={`${styles.listElement}`} onClick={() => handleClick(item)}>
+                {checkCount(item) !== 0 && (
+                    <Counter count={checkCount(item)} size="default" />
+                )}
+                <img
+                    className={`${styles.cardPhoto}  pl-4 pb-4`}
+                    src={item.image}
+                    alt={item.name}
+                    onClick={() => handlePopupClick(item)}
+                ></img>
+                <div className={`${styles.currencyContainer}`}>
                     <p
-                        className={`${styles.cardDescription} text text_type_main-default`}
+                        className={`${styles.cardsPrice} pt-2 pb-2 pr-4 text text_type_digits-default`}
                     >
-                        {item.name}
+                        {item.price}
                     </p>
-                </li>
-            </div>
-        </>
+                    <CurrencyIcon />
+                </div>
+                <p
+                    className={`${styles.cardDescription} text text_type_main-default`}
+                >
+                    {item.name}
+                </p>
+            </li>
+        </div>
     );
 }
 
