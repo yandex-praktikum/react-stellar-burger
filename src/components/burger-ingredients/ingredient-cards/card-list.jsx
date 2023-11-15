@@ -11,13 +11,11 @@ const CardList = React.forwardRef(
                 <p ref={ref} id={id} className="text text_type_main-medium"></p>
                 <ul className={`${styles.cardList}`}>
                     {data.map((item) => (
-                        <React.Fragment key={item._id}>
-                            <Card
-                                item={item}
-                                key={item._id}
-                                onClick={() => handleOpenModal(item)}
-                            />
-                        </React.Fragment>
+                        <Card
+                            item={item}
+                            key={item._id}
+                            onClick={() => handleOpenModal(item)}
+                        />
                     ))}
                 </ul>
             </div>
