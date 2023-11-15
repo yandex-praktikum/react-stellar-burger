@@ -24,7 +24,7 @@ export const ingredientDetailPropType = {
 
 export const cardsPropType = {
   item: ingredientPropTypes.isRequired,
-  onclick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export const checklNumber = PropTypes.number.isRequired;
