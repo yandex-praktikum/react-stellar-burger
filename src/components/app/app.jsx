@@ -2,37 +2,53 @@ import styles from "./app.module.css";
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBurgerIngredients } from "../../services/actions/ingredient-actions";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { addCurrentBun, addCurrentIngredient } from '../../services/actions/current-ingredients-actions'
 
 function App() {
-  const [data, setData] = useState([]);
-  const baseURL = 'https://norma.nomoreparties.space/api/ingredients';
 
-  useEffect(() => {
-    fetch(baseURL)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(getBurgerIngredients());
+    }, [dispatch]);
+
+    const handleDrop = (item) => {
+        if (item.type === "bun") {
+            dispatch(addCurrentBun(item))
+        } else {
+            dispatch(addCurrentIngredient(item))
         }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    };
 
-  return (
-    <div className={styles.app}>
-      <AppHeader />
-      <main className={styles['app-body']}>
-        <BurgerIngredients ingredients={data} />
-        <BurgerConstructor burgerArr={data} />
-      </main>
-    </div>
-  );
+    const { isLoading, ingredients, hasError } = useSelector(
+        (store) => store.allIngredients
+    );
+
+    if (isLoading) {
+        return <div className={`text text_type_main-default`}>Загрузка...</div>;
+    } else {
+        if (hasError) {
+            return (
+                <div className={`text text_type_main-default`}>Произошла ошибка</div>
+            );
+        }
+        return (
+            <div className={styles.app}>
+                <AppHeader />
+                <main className={styles.main}>
+                    <DndProvider backend={HTML5Backend}>
+                            <BurgerIngredients/>
+                            <BurgerConstructor onDropHandler={handleDrop} />
+                    </DndProvider>
+                </main>
+            </div>
+        );
+    }
 }
 
 export default App;
