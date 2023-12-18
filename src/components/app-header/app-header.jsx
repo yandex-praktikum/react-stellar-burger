@@ -1,36 +1,51 @@
-import { Logo, ListIcon, BurgerIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import headerStyles from './app-header.module.css';
 import React from "react";
+import styles from "./app-header.module.css"
+import { Logo, BurgerIcon, ListIcon, ProfileIcon, } from "@ya.praktikum/react-developer-burger-ui-components";
+import { NavigationLink } from "../navigation-link/navigation-link";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 function AppHeader() {
-  return (
-    <header className={headerStyles['app-header']}>
-      <nav className={headerStyles['menu-header']}>
-        <ul className={`${headerStyles['list-header']} pb-4 pt-4`}>
-          <li className='pl-5 pr-5 pb-5 pt-5 '>
-            <a href='#' className={headerStyles['link-header']}>
-              <BurgerIcon type="primary" />
-              <p className="text text_type_main-default pl-2 pr-2">Конструктор</p>
-            </a>
-          </li>
-          <li className='pl-5 pr-5 pb-5 pt-5 '>
-            <a href='#' className={headerStyles['link-header']}>
-              <ListIcon type="secondary" />
-              <p className="text text_type_main-default text_color_inactive pl-2 pr-2">Лента заказов</p>
-            </a>
-          </li>
+  const location = useLocation();
+  const active = (to) => {
+    if (to === "/profile") {
+      return (location.pathname.indexOf(to) === 0)
+        ? "primary"
+        : "secondary"
+    } else {
+      return to === location.pathname
+        ? "primary"
+        : "secondary"
+    }
+  }
 
-          <Logo />
-          <li className='pl-5 pr-5 pb-5 pt-5'>
-            <a href='#' className={headerStyles['link-header']}>
-              <ProfileIcon type="secondary" />
-              <p className="text text_type_main-default text_color_inactive pl-2 pr-2">Личный кабинет</p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+  return (
+    <>
+      <header className={styles.header}>
+        <nav className={styles.panel}>
+          <ul className={`${styles.links}`}>
+            <li className={`${styles.link_home} cursor`}>
+              <NavigationLink to={'/'} icon={<BurgerIcon type={active("/")} />} label={'Конструктор'} />
+            </li>
+            <li className={`${styles.link_feed} cursor`}>
+              <NavigationLink to={'/feed'}
+                icon={<ListIcon type={active("/feed")} />} label={'Лента заказов'} />
+            </li>
+            <li className={`${styles.link_logo} cursorLogo`}>
+              <Link to={'/'}><Logo /></Link>
+            </li>
+            <li className={`${styles.link_profile} cursor`}>
+              <NavigationLink to={'/profile'}
+                icon={<ProfileIcon type={active("/profile")} />} label={'Личный кабинет'} />
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+    </>
   );
 }
 
-export default React.memo(AppHeader)
+export default React.memo(AppHeader);

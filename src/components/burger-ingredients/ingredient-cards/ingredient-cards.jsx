@@ -16,12 +16,12 @@ const IngredientCards = () => {
         dispatch(setIngredientDetails(ingredient));
         setVisible(true);
     };
-    
+
     const handleCloseModal = () => {
         dispatch(clearIngredientDetails());
         setVisible(false);
     };
-    
+
     const setTab = (tab) => {
         setCurrentTab(tab);
         const element = document.getElementById(tab);
@@ -31,7 +31,7 @@ const IngredientCards = () => {
     };
 
     const { ingredients } = useSelector((store) => store.allIngredients);
-    
+
     const filtered = (type) => {
         return ingredients.filter((item) => item.type === type);
     };
@@ -130,11 +130,6 @@ const IngredientCards = () => {
                     />
                 </div>
             </div>
-            {visible && (
-                <Modal header={"Детали ингредиента"} closeModal={handleCloseModal}>
-                    <IngredientDetail></IngredientDetail>
-                </Modal>
-            )}
         </>
     );
 };

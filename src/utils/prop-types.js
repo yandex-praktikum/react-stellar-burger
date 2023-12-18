@@ -30,6 +30,7 @@ export const cardsPropType = {
 export const checklNumber = PropTypes.number.isRequired;
 export const checkString = PropTypes.string.isRequired;
 export const optionalObject = PropTypes.object.isRequired;
+export const optionalString = PropTypes.string.isRequired;
 
 export const modalPropType = {
   closeModal: PropTypes.func.isRequired,

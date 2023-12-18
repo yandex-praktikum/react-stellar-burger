@@ -45,3 +45,7 @@
     grid-column: 4;
     grid-row: 2;
 }
+
+.title {
+    margin-top: 120px;
+}
