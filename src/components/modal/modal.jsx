@@ -7,7 +7,7 @@ import { modalPropType } from "../../utils/prop-types";
 
 const mRoot = document.getElementById("modal-root");
 
-const Modal = ({ header, closeModal, children }) => {
+const Modal = ({ closeModal, children }) => {
 
     const handleCloseModal = useCallback(() => {
         closeModal();
@@ -30,7 +30,6 @@ const Modal = ({ header, closeModal, children }) => {
             <div className={styles.modal}>
                 <section className={`${styles.modalContainer}`}>
                     <h2 className={`${styles.modalTitle} pt-10 pr-10 pl-10`}>
-                        <p className={`text text_type_main-large`}>{header}</p>
                         <CloseButton onClick={handleCloseModal} />
                     </h2>
                     {children}

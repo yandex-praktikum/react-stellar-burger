@@ -34,6 +34,5 @@ export const optionalString = PropTypes.string.isRequired;
 
 export const modalPropType = {
   closeModal: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-  header: PropTypes.string.isRequired
-};
+  children: PropTypes.node.isRequired
+}
