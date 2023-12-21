@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearCurrentIngredients } from "../../../services/actions/current-ingredients-actions";
 import { resetOrder } from "../../../services/actions/order-action";
 import { useNavigate } from "react-router-dom";
-import { User } from "../../../services/selectors/user-selector";
+import { user } from "../../../services/selectors/user-selector";
 
 
 function BurgerFullPrice() {
@@ -16,7 +16,7 @@ function BurgerFullPrice() {
     );
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(User)
+    const userSelector = useSelector(user)
     const burgerInfill = ingredientsConstructor.other;
     const burgerBun = ingredientsConstructor.bun;
     const [fullPriceModal, setFullPriceModal] = useState(false);
@@ -59,7 +59,7 @@ function BurgerFullPrice() {
                     type="primary"
                     size="large"
                     onClick={() => {
-                        if (!user) {
+                        if (!userSelector) {
                           navigate("/login");
                         } else {
                           handleOpenModal();

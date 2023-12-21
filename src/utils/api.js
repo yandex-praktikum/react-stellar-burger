@@ -5,7 +5,7 @@ import { POST_RESET_ENDPOINT } from "./base-URL";
 import { setUser } from "../services/actions/user-actions";
 import { fetchWithRefresh } from "./reset-api";
 
-export const Register = (name, pass, email) => {
+export const register = (name, pass, email) => {
   return fetch(POST_REGISTER_ENDPOINT, {
     method: "POST",
     headers: {

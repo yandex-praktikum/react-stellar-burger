@@ -4,14 +4,14 @@ import { FormContainerUser } from "../components/from-container/from-container";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser} from "../utils/api";
 import { getUser } from "../services/actions/user-actions";
-import { Name, Email } from "../services/selectors/user-selector";
+import { name, email } from "../services/selectors/user-selector";
 import { addUser, addEmail, addPassword } from "../services/actions/inputs-actions";
 import { selectedEmail, selectedUserName, selectedPassword } from "../services/selectors/inputs-selectors";
 
 export const ProfileInputFields = () => {
   const dispatch = useDispatch();
-  const nameValue = useSelector(Name);
-  const emailValue = useSelector(Email);
+  const nameValue = useSelector(name);
+  const emailValue = useSelector(email);
 
   function setValue() {
     dispatch(getUser());

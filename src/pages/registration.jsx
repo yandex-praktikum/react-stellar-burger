@@ -4,7 +4,7 @@ import { FormContainerOther } from "../components/from-container/from-container"
 import { useDispatch, useSelector } from "react-redux";
 import { selectedEmail, selectedPassword, selectedUserName } from "../services/selectors/inputs-selectors";
 import {login } from "../services/actions/user-actions";
-import { Register } from "../utils/api";
+import { register } from "../utils/api";
 
 export function Reg() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export function Reg() {
 
   function onClick(evt) {
     evt.preventDefault();
-    Register(name, pass, email);
+    register(name, pass, email);
     dispatch(login(email, pass));
   }
 
