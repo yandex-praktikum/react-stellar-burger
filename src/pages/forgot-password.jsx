@@ -15,9 +15,11 @@ export function ForgotPassword() {
     function onClick(evt) {
       evt.preventDefault();
       postApiResetPassword(email)
+      let test = localStorage.getItem('resetPasswordFlag');
+      console.log(test);
       if (localStorage.getItem('resetPasswordFlag')) {
         // Флаг существует в localStorage
-        navigate('/reset-password', { replace: false });
+        navigate('/reset-password', { replace: false, state: {isFromComponent: true} });
       } else {
         // Флаг отсутствует в localStorage
         navigate('/login', { replace: false });

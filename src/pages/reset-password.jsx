@@ -6,11 +6,17 @@ import { useSelector } from "react-redux";
 import { postApiReset } from "../utils/api";
 
 
-export function ResetPassword() {
+export function ResetPassword(props) {
 
     const navigate = useNavigate()
     const password = useSelector((store) => store.inputs.password)
     const token = useSelector((store) => store.inputs.token)
+
+    if (!props.isFromComponent) return(
+        <h1>
+            404
+        </h1>
+    )
 
     function onClick(evt) {
         evt.preventDefault();

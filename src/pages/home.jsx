@@ -25,7 +25,7 @@ export function Home() {
         }
       };
 
-      const { isLoading, ingredients, hasError } = useSelector(
+      const { isLoading, hasError } = useSelector(
         (store) => store.allIngredients
       );
 
@@ -42,7 +42,7 @@ return (
     <div className={styles.main}>
           <DndProvider backend={HTML5Backend}>
             <div>
-              <BurgerIngredients ingredients={ingredients} />
+              <BurgerIngredients />
             </div>
             <div>
               <BurgerConstructor onDropHandler={handleDrop} />
