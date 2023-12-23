@@ -24,10 +24,6 @@ export const register = (name, pass, email) => {
       localStorage.setItem("refreshToken", res.refreshToken);
       return res;
     })
-    .catch((err) => {
-      console.log(err);
-      return Promise.reject(err);
-    });
 };
 
 export const forgotPassword = (email) => {
@@ -47,9 +43,6 @@ export function postApiResetPassword(email) {
     .then((res) => {
       console.log(res);
       localStorage.setItem("resetPasswordFlag", true);
-    })
-    .catch((err) => {
-      console.log(err);
     });
 }
 
@@ -71,9 +64,6 @@ export function postApiReset(newPassword, token) {
     .then((res) => {
       console.log(res);
       localStorage.removeItem("resetPasswordFlag");
-    })
-    .catch((err) => {
-      console.log(err);
     });
 }
 

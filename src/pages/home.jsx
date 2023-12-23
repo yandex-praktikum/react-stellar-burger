@@ -31,15 +31,11 @@ export function Home() {
         }
 }
 return (
-    <div className={styles.main}>
+    <main className={styles.main}>
           <DndProvider backend={HTML5Backend}>
-            <div>
               <BurgerIngredients />
-            </div>
-            <div>
               <BurgerConstructor onDropHandler={handleDrop} />
-            </div>
           </DndProvider>
-        </div>
+        </main>
 )
 }

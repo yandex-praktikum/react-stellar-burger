@@ -98,4 +98,5 @@
     max-height: calc(100% - 88px);
     display: flex;
     flex-direction: row;
+    justify-content: center;
   }

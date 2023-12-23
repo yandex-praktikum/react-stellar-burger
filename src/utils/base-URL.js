@@ -18,8 +18,5 @@ export function checkResponse(res) {
       .then(errorData => {
         throw new Error(`Request failed with status ${res.status}: ${errorData.message}`);
       })
-      .catch(() => {
-        throw new Error(`Request failed with status ${res.status}`);
-      });
   }
 }
