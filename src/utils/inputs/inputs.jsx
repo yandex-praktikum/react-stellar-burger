@@ -27,8 +27,8 @@ export const Links = {
     newUser: <FormFooterLinks key="newUser" infoText="Вы - новый пользователь?"><Link to="/register" className={`${styles.link}`}>Зарегистрироваться</Link></FormFooterLinks>
 }
 
-export const navigateButton = ({ onClick, label }) => {
-    return <Button htmlType="submit" type="primary" size="medium" children={label} onClick={onClick} />
+export const navigateButton = ({ label }) => {
+    return <Button htmlType="submit" type="primary" size="medium" children={label}/>
 }
 
 export const Buttons = {

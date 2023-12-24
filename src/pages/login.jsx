@@ -19,11 +19,12 @@ export function Log() {
 
     const loginFormHeader = "Вход"
     const loginInputs = [Inputs.email, Inputs.password];
-    const loginButton = navigateButton({onClick: onClick, label: "Войти"});
+    const loginButton = navigateButton({label: "Войти"});
     const loginFooterLinks = [Links.newUser, Links.forgotPassword];
 
 
     return (
-      <FormContainerOther header={loginFormHeader} inputs={loginInputs} button={loginButton} links={loginFooterLinks}/>
+      <FormContainerOther header={loginFormHeader} inputs={loginInputs} button={loginButton} 
+      links={loginFooterLinks} handleSubmit={onClick}/>
     )
   }

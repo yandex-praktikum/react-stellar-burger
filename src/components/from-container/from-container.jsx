@@ -32,14 +32,14 @@ export function FormContainerLogin({ header }) {
 }
 
 
-export function FormContainerOther({header, inputs, links, button}) {
+export function FormContainerOther ({header, inputs, links, button, handleSubmit}) {
 
     return (
       <section className={`${styles.formContainer}`}>
         <p className="text text_type_main-medium">
           {header}
         </p>
-        <form >
+        <form onSubmit={handleSubmit}>
           <fieldset className={styles.formFieldset}>
             <div className={`${styles.formInputs}`}>
               {[...inputs]}
@@ -56,7 +56,7 @@ export function FormContainerOther({header, inputs, links, button}) {
     )
   }
 
-  export function FormContainerUser({inputs, button, handleSubmit, handleReset}) {
+  export function FormContainerUser({inputs, button, handleSubmit, handleReset, }) {
 
     return (
       <section className={`${styles.sectionUser}`}>

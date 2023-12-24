@@ -29,11 +29,11 @@ export function ForgotPassword() {
 
     const forgotPasswordFormHeader = "Восстановление пароля"
     const forgotPasswordInputs = [Inputs.specifyEmail];
-    const forgotPasswordButton = navigateButton({onClick: onClick, label: "Восстановить"});
+    const forgotPasswordButton = navigateButton({ label: "Восстановить"});
     const forgotPasswordLinks = [Links.rememberPassword];
 
     return (
       <FormContainerOther header={forgotPasswordFormHeader} inputs={forgotPasswordInputs} button={forgotPasswordButton}
-                        links={forgotPasswordLinks}/>
+                        links={forgotPasswordLinks} handleSubmit={onClick}/>
     )
   }

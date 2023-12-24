@@ -29,11 +29,11 @@ export function ResetPassword(props) {
 
     const resetPasswordFormHeadder = "Восстановление пароля";
     const resetPasswordInputs = [Inputs.newPassword, Inputs.token];
-    const resetPasswordButton = navigateButton({ onClick: onClick, label: "Сохранить" });
+    const resetPasswordButton = navigateButton({label: "Сохранить" });
     const resetPasswordLinks = [Links.rememberPassword];
 
     return (
         <FormContainerOther header={resetPasswordFormHeadder} inputs={resetPasswordInputs} button={resetPasswordButton}
-            links={resetPasswordLinks} />
+            links={resetPasswordLinks} handleSubmit={onClick}/>
     )
 }

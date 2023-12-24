@@ -21,7 +21,6 @@ export function Reg() {
   const registerFormHeader = "Регистрация";
   const registerInputs = [Inputs.name, Inputs.email, Inputs.password];
   const registerButton = navigateButton({
-    onClick: onClick,
     label: "Зарегистрироваться",
   });
   const registerFooterLinks = [Links.alreadyRegistered];
@@ -32,6 +31,7 @@ export function Reg() {
       inputs={registerInputs}
       button={registerButton}
       links={registerFooterLinks}
+      handleSubmit={onClick}
       name="formRegister"
     />
   );
