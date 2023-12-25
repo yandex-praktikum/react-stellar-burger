@@ -5,12 +5,18 @@ import { cardsPropType } from "../../../utils/prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentBun, addCurrentIngredient } from "../../../services/actions/current-ingredients-actions";
 import { useDrag } from "react-dnd";
+import { Link, useLocation } from "react-router-dom";
 
 function Card({ item, onClick }) {
+    const location = useLocation();
     const dispatch = useDispatch();
     const ingredientsConstructor = useSelector(
         (store) => store.currentIngredients
     );
+
+    const ingredientId = item['_id'];
+    const background = location.state && location.state.background;
+
 
     const [isDragging, dragRef] = useDrag({
         type: "ingredients",
@@ -46,36 +52,41 @@ function Card({ item, onClick }) {
         }
     };
 
-    const handlePopupClick = () => {
-        onClick();
-    };
+    // const handlePopupClick = () => {
+    //     onClick();
+    // };
     return (
-        <div ref={dragRef}>
-            <li className={`${styles.listElement}`} onClick={() => handleClick(item)}>
-                {checkCount(item) !== 0 && (
-                    <Counter count={checkCount(item)} size="default" />
-                )}
-                <img
-                    className={`${styles.cardPhoto}  pl-4 pb-4`}
-                    src={item.image}
-                    alt={item.name}
-                    onClick={() => handlePopupClick(item)}
-                ></img>
-                <div className={`${styles.currencyContainer}`}>
+        <Link
+            key={ingredientId}
+            to={`/ingredients/${ingredientId}`}
+            state={{ background: location }}
+            className={styles.link}>
+            <div ref={dragRef}>
+                <li className={`${styles.listElement}`} onClick={() => handleClick(item)}>
+                    {checkCount(item) !== 0 && (
+                        <Counter count={checkCount(item)} size="default" />
+                    )}
+                    <img
+                        className={`${styles.cardPhoto}  pl-4 pb-4`}
+                        src={item.image}
+                        alt={item.name}
+                    ></img>
+                    <div className={`${styles.currencyContainer}`}>
+                        <p
+                            className={`${styles.cardsPrice} pt-2 pb-2 pr-4 text text_type_digits-default`}
+                        >
+                            {item.price}
+                        </p>
+                        <CurrencyIcon />
+                    </div>
                     <p
-                        className={`${styles.cardsPrice} pt-2 pb-2 pr-4 text text_type_digits-default`}
+                        className={`${styles.cardDescription} text text_type_main-default`}
                     >
-                        {item.price}
+                        {item.name}
                     </p>
-                    <CurrencyIcon />
-                </div>
-                <p
-                    className={`${styles.cardDescription} text text_type_main-default`}
-                >
-                    {item.name}
-                </p>
-            </li>
-        </div>
+                </li>
+            </div>
+        </Link>
     );
 }
 

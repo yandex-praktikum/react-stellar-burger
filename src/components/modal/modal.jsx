@@ -7,7 +7,7 @@ import { modalPropType } from "../../utils/prop-types";
 
 const mRoot = document.getElementById("modal-root");
 
-const Modal = ({ header, closeModal, children }) => {
+const Modal = ({ closeModal, children, header }) => {
 
     const handleCloseModal = useCallback(() => {
         closeModal();
