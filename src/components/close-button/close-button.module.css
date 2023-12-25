@@ -1,4 +1,6 @@
 .closeButton {
+    cursor: pointer;
     background-color: transparent;
     border: none;
+    z-index: 100;
 }
